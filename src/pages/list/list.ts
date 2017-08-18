@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { CreatePage } from '../create/create'
 
 @Component({
   selector: 'page-list',
@@ -33,5 +34,14 @@ export class ListPage {
     this.navCtrl.push(ListPage, {
       item: item
     });
+  }
+
+  newReport() {
+    let navOptions = {
+      animate: true,
+      animation: 'md-trasition',
+      direction: 'foward'
+    }
+    this.navCtrl.push(CreatePage, {}, navOptions);
   }
 }

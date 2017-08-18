@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="navbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Criar Denúncia</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="report" (ngSubmit)="logForm()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Tipo de Denuncia</ion-label>
+        <ion-select formControlName="tipoDenuncia">
+          <ion-option value="1">Faltou o CPF</ion-option>
+          <ion-option value="2">Faltou a Nota</ion-option>
+        </ion-select>
+      </ion-item>
+      <!--<ion-item>-->
+        <!--<ion-label floating>Tipo de Nota Fiscal</ion-label>-->
+        <!--<ion-select formControlName="tipoDocumento">-->
+          <!--<ion-option value="01">Modelo 1</ion-option>-->
+          <!--<ion-option value="02">Modelo 2</ion-option>-->
+          <!--<ion-option value="ecf">Cupom fiscal</ion-option>-->
+          <!--<ion-option value="56">Eletronica</ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
+      <ion-item>
+        <ion-label floating>Código da NF</ion-label>
+        <ion-input type="text" formControlName="cNF"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Valor da NF</ion-label>
+        <ion-input type="text" formControlName="valor"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>CNPJ Emitente</ion-label>
+        <ion-input type="text" formControlName="cnpjEmitente"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Data Emissão</ion-label>
+        <ion-input type="date" formControlName="dataEmissao"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Descrição</ion-label>
+        <ion-input type="text" formControlName="denuncia"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Situação</ion-label>
+        <ion-input type="text" formControlName="situacao"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Numero ECF</ion-label>
+        <ion-input type="text" formControlName="numeroECF"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button type="submit"  block>Denunciar</button>
+  </form>
+</ion-content>

@@ -1,23 +1,33 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="navbar">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Minhas Denúncias</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-list class="message-container" [hidden]="isEmpty">
+    <h2 class="message-title" color="secondary-text-color" text-center>Você não possui denúncias.</h2>
+    <ion-card-content color="secondary-text-color" text-center>
+      <p class="message-text">Para criar uma denúncia crie no bottão de +.</p>
+    </ion-card-content>
+  </ion-list>
+
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
+    <button ion-item *ngFor="let conduct of historyConducts; index as i" (click)="console.log('b')">
+      <ion-icon name="document" item-left></ion-icon>
+      <h2> Registro {{ i + 1 }}</h2>
+      <p>{{ conduct.date | date: 'dd/MM/yyyy'}}</p>
+      <ion-note item-right>{{ conduct.date | date: 'shortTime'}}</ion-note>
     </button>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+
 </ion-content>
+
+<ion-fab right bottom>
+  <button ion-fab color="fabButton" (click)="newReport()">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>
