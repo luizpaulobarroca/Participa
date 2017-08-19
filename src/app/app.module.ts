@@ -7,6 +7,7 @@ import {CustomHttp} from "../services/customHttp"
 import { HttpModule } from '@angular/http';
 import {Device} from "@ionic-native/device"
 import {AuthService} from "../services/authService"
+// import { AUTH_PROVIDERS } from 'ng2-bearer';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';

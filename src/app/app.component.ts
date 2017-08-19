@@ -5,8 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { CreatePage } from '../pages/create/create'
 import { ListPage } from '../pages/list/list';
-//import {LoginPage} from "../pages/login/login";
+import {LoginPage} from "../pages/login/login";
 import {Storage} from "@ionic/storage"
+import {AuthService} from "../services/authService"
 
 @Component({
   templateUrl: 'app.html'
@@ -14,12 +15,13 @@ import {Storage} from "@ionic/storage"
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ListPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
-              public splashScreen: SplashScreen, private storage: Storage) {
+              public splashScreen: SplashScreen, private storage: Storage,
+              private authService: AuthService) {
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -27,9 +29,13 @@ export class MyApp {
       { title: 'Criar Denúncia', component: CreatePage }
     ];
 
+    this.statusBar.overlaysWebView(true);
+    this.statusBar.backgroundColorByHexString('#5F2F9R');
+
     this.storage.get('authorization').then((val) => {
       if(val !== null && val !== undefined) {
         this.nav.setRoot(ListPage);
+        this.authService.setToken(val);
       }
       this.initializeApp();
     });
@@ -53,6 +59,6 @@ export class MyApp {
 
   logout() {
     this.storage.remove('authorization');
-    this.nav.setRoot(ListPage);
+    this.nav.setRoot(LoginPage);
   }
 }

@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class AuthService {
 
+  token: any;
   constructor(private customHttp: CustomHttp, private storage: Storage) {
   }
 
@@ -40,6 +41,16 @@ export class AuthService {
   }
 
   getCPF() {
-    return this.storage.get('login');
+    this.storage.get('login').then(value => {
+      return value;
+    });
+  }
+
+  setToken(token) {
+    this.token = token;
+  }
+
+  getToken() {
+    return this.token;
   }
 }

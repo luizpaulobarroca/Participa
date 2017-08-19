@@ -9,15 +9,15 @@
 
 <ion-content>
 
-  
 
-  <ion-list class="message-container" [hidden]="isEmpty">
+
+  <ion-list class="message-container" [hidden]="reports.length !== 0">
     <h3 class="message-title" color="secondary-text-color" text-center>Você não possui nenhuma denúncia registrada.</h3>
     <div class="list-bg-image">
       <img src="../assets/list-background.png" class="bg-image">
     </div>
     <ion-card-content color="secondary-text-color" text-center>
-      <p class="message-text">Se ver alguma irregularidade não deixe de nos avisar!</p>  
+      <p class="message-text">Se ver alguma irregularidade não deixe de nos avisar!</p>
     </ion-card-content>
   </ion-list>
 
@@ -30,7 +30,7 @@
     </button>
   </ion-list>
 
-  
+
 
 </ion-content>
 
