@@ -37,14 +37,6 @@ export class LoginPage {
     });
   }
 
-  ionViewCanEnter() {
-    this.storage.get('authorization').then((val) => {
-      if(val !== null && val !== undefined) {
-        this.navCtrl.setRoot(ListPage)
-      }
-    });
-  }
-
   presentAlert(url: string) {
     let alert = this.alertCtrl.create({
       title: 'Autorizar',

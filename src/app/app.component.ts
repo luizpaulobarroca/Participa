@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CreatePage } from '../pages/create/create'
 import { ListPage } from '../pages/list/list';
 import {LoginPage} from "../pages/login/login";
+import {Storage} from "@ionic/storage"
 
 @Component({
   templateUrl: 'app.html'
@@ -17,14 +18,21 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  constructor(public platform: Platform, public statusBar: StatusBar,
+              public splashScreen: SplashScreen, private storage: Storage) {
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Minhas Denúncias', component: ListPage },
       { title: 'Criar Denúncia', component: CreatePage }
     ];
+
+    this.storage.get('authorization').then((val) => {
+      if(val !== null && val !== undefined) {
+        this.nav.setRoot(ListPage);
+      }
+      this.initializeApp();
+    });
 
   }
 
