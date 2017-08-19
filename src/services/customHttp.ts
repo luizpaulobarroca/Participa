@@ -9,7 +9,6 @@ export class CustomHttp {
   constructor(private http: Http, private storage:Storage) {
     this.storage.get('authorization').then(val => {
       this.token = val;
-      console.log(val);
     });
   }
 

@@ -17,7 +17,7 @@
   </div>
 
   <ion-list>
-    <button ion-item *ngFor="let report of reports" (click)="console.log('b')">
+    <button ion-item *ngFor="let report of reports">
       <ion-icon name="md-megaphone" item-left></ion-icon>
       <h2>{{report.cnpjEmitente}}</h2>
       <p>{{ report.situacao }}</p>

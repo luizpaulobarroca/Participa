@@ -35,6 +35,7 @@ export class MyApp {
     this.storage.get('authorization').then((val) => {
       if(val !== null && val !== undefined) {
         this.nav.setRoot(ListPage);
+        this.authService.saveCPF();
         this.authService.setToken(val);
       }
       this.initializeApp();

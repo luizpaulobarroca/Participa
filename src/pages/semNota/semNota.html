@@ -21,18 +21,18 @@
       </ion-item>
       <ion-item>
         <ion-label floating>CNPJ Emitente</ion-label>
-        <ion-input type="text" formControlName="cnpjEmitente"></ion-input>
+        <ion-input type="number" formControlName="cnpjEmitente"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Código da NF</ion-label>
-        <ion-input type="text" formControlName="cNF"></ion-input>
+        <ion-input type="number" formControlName="cNF"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Valor da NF</ion-label>
-        <ion-input type="text" formControlName="valor"></ion-input>
+        <ion-input type="number" formControlName="valor"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Serie da NF</ion-label>
+        <ion-label floating>Série da NF</ion-label>
         <ion-input type="text" formControlName="serie"></ion-input>
       </ion-item>
       <ion-item>
@@ -40,10 +40,10 @@
         <ion-input type="text" formControlName="subserie"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Numero ECF</ion-label>
-        <ion-input type="text" formControlName="numeroECF"></ion-input>
+        <ion-label floating>Número ECF</ion-label>
+        <ion-input type="number" formControlName="numeroECF"></ion-input>
       </ion-item>
     </ion-list>
-    <button ion-button type="submit" [disabled]="!report.valid" block>Denunciar</button>
+    <button ion-button type="submit" color="fabButton" block>Denunciar</button>
   </form>
 </ion-content>

@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 export class AuthService {
 
   token: any;
+  cpf = null;
   constructor(private customHttp: CustomHttp, private storage: Storage) {
   }
 
@@ -41,8 +42,16 @@ export class AuthService {
   }
 
   getCPF() {
-    this.storage.get('login').then(value => {
-      return value;
+    return this.cpf;
+  }
+
+  setCPF(val) {
+    this.cpf = val;
+  }
+
+  saveCPF() {
+    this.storage.get('login').then((value) => {
+      this.cpf = value;
     });
   }
 

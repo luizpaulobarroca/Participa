@@ -79,6 +79,7 @@ export class LoginPage {
       let res = JSON.parse(response.text());
       this.storage.set('idAutorizacao', res.idAutorizacao);
       this.storage.set('login', this.report.value.cpf);
+      this.authService.setCPF(this.report.value.cpf);
       this.login = this.report.value.cpf;
       this.idAutorizacao = res.idAutorizacao;
       this.presentAlert('<a href=' + res.urlAutorizacao + '>Aqui!</a>');
