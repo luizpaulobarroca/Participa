@@ -6,7 +6,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import {CustomHttp} from "../services/customHttp"
 import { HttpModule } from '@angular/http';
 import {Device} from "@ionic-native/device"
-
+import {AuthService} from "../services/authService"
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -48,7 +48,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CustomHttp,
-    Device
+    Device,
+    AuthService
   ]
 })
 export class AppModule {}

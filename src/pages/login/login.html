@@ -1,24 +1,30 @@
-<ion-content>
-  <div class="login-card">
-    <ion-card>
+<ion-content class="login-bg">
+  <div class="login-content">
+    <div class="logo-align">
+      <img src="../assets/logo.png" width="80%" alt="">
+    </div>
 
-      <ion-card-header class="login-header">
-        Identifique-se
-      </ion-card-header>
+    <div class="login-container">
+      <ion-card class="login">
 
-      <ion-card-content class="login-content">
-        <form [formGroup]="report" (ngSubmit)="logForm()">
-          <ion-item>
-            <ion-label floating>CPF/CNPJ</ion-label>
-            <ion-input type="text" formControlName="cpf"></ion-input>
-          </ion-item>
-          <div class="login-button">
-            <button ion-button type="submit" [disabled]="!report.valid">Entrar</button>
-          </div>
-        </form>
-      </ion-card-content>
+        <ion-card-header class="login-header">
+          Identifique-se
+        </ion-card-header>
 
-    </ion-card>
+        <ion-card-content class="login-content">
+          <form [formGroup]="report" (ngSubmit)="logForm()">
+            <ion-item>
+              <ion-label floating>CPF/CNPJ</ion-label>
+              <ion-input type="number" formControlName="cpf"></ion-input>
+            </ion-item>
+            <div class="login-button">
+              <button ion-button type="submit" color="fabButton" [disabled]="!report.valid">Entrar</button>
+            </div>
+          </form>
+        </ion-card-content>
+
+      </ion-card>
+    </div>
 
   </div>
 </ion-content>

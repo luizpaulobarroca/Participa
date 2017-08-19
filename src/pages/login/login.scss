@@ -1,19 +1,41 @@
-//.login-header {
-//  display: flex;
-//  flex-direction: row;
-//  justify-content: center;
-//  font-weight: bold;
-//}
-//
-//.login-button {
-//	justify-content: center;
-//	display: flex;
-//}
-//
-//.login-card {
-//	display: flex;
-//	flex-direction: column;
-//	justify-content: flex-end;
-//	//height: 90%;
-//}
-//
+.login-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.login-button {
+	justify-content: center;
+	display: flex;
+}
+
+.logo-align {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+.login {
+  margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+  width: 80%;
+}
+
+.login-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-card {
+  width: 80%;
+}
+
+.login-bg {
+  background-image: url('../assets/loginbg.png');
+}
