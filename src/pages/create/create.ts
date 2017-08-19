@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SemNotaPage} from "../semNota/semNota"
 
 @Component({
   selector: 'create-page',
@@ -8,34 +9,27 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class CreatePage {
   private report : FormGroup;
-  tiposDenuncias = [
-    ['1', 'Faltou o CPF'],
-    ['2', 'Faltou a nota']
-  ];
-
-  tiposNota = [
-    ['01', 'Modelo 1'],
-    ['02', 'Modelo 2'],
-    ['ecf', 'Cupom fiscal'],
-    ['56', 'Eletronica']
-  ];
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
     this.report = this.formBuilder.group({
-      cNF: [''],
-      cnpjEmitente: ['', Validators.required],
       dataEmissao: ['', Validators.required],
       denuncia: ['', Validators.required],
-      numeroECF: ['', Validators.required],
-      valor: ['', Validators.required],
-      situacao: ['', Validators.required],
-      tipoDenuncia: ['', Validators.required],
-      tipoDocumento: ['', Validators.required],
+      tipoDenuncia: ['', Validators.required]
     });
   }
 
   logForm() {
-    console.log(this.report.value);
+    let navOptions = {
+      animate: true,
+      animation: 'md-trasition',
+      direction: 'foward'
+    }
+    let values = this.report.value;
+    if(values.tipoDenuncia == '1') {
+      this.navCtrl.push(SemNotaPage, values, navOptions);
+    } else {
+      console.log('massa');
+      // this.navCtrl.push(CreatePage, {}, navOptions);
+    }
   }
 
   teste () {
