@@ -18,7 +18,6 @@ export class FaqPage {
 
   viewDetail(index){
     console.log(index);
-    //this.navCtrl.animation('foward');
     var navOptions = {
       animate: true,
       animation: 'md-trasition',

@@ -5,6 +5,7 @@ import { MenuController } from 'ionic-angular';
 import { CustomHttp } from '../../services/customHttp';
 import {Request, RequestMethod} from '@angular/http';
 import {AuthService} from "../../services/authService"
+import { ListDetailPage } from "./list-detail/list-detail";
 
 @Component({
   selector: 'page-list',
@@ -38,7 +39,15 @@ export class ListPage {
     });
   }
 
+  viewDetail(index){
+    var navOptions = {
+      animate: true,
+      animation: 'md-trasition',
+      direction: 'foward'
+    }
 
+    this.navCtrl.push(ListDetailPage, this.reports[index], navOptions);
+  }
 
   newReport() {
     let navOptions = {

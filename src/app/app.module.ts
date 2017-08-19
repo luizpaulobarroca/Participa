@@ -14,6 +14,7 @@ import { BackgroundGeolocation } from "@ionic-native/background-geolocation"
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { ListDetailPage } from '../pages/list/list-detail/list-detail';
 import { CreatePage } from '../pages/create/create';
 import {SemNotaPage} from "../pages/semNota/semNota";
 import {LoginPage} from "../pages/login/login";
@@ -28,6 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
+    ListDetailPage,
     CreatePage,
     SemNotaPage,
     LoginPage,
@@ -46,6 +48,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
+    ListDetailPage,
     CreatePage,
     SemNotaPage,
     LoginPage,
