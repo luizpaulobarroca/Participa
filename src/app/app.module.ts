@@ -3,12 +3,13 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
-import {CustomHttp} from "../services/customHttp"
+import { CustomHttp } from "../services/customHttp";
+import { FaqService } from "../services/faqService";
 import { HttpModule } from '@angular/http';
-import {Device} from "@ionic-native/device"
-import {AuthService} from "../services/authService"
+import { Device } from "@ionic-native/device"
+import { AuthService } from "../services/authService"
 import { Camera } from '@ionic-native/camera';
-import {BackgroundGeolocation} from "@ionic-native/background-geolocation"
+import { BackgroundGeolocation } from "@ionic-native/background-geolocation"
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -16,6 +17,8 @@ import { ListPage } from '../pages/list/list';
 import { CreatePage } from '../pages/create/create';
 import {SemNotaPage} from "../pages/semNota/semNota";
 import {LoginPage} from "../pages/login/login";
+import { FaqPage } from "../pages/faq/faq";
+import { FaqDetailPage } from  "../pages/faq/faq-detail/faq-detail";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +30,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     CreatePage,
     SemNotaPage,
-    LoginPage
+    LoginPage,
+    FaqPage,
+    FaqDetailPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     CreatePage,
     SemNotaPage,
-    LoginPage
+    LoginPage,
+    FaqPage,
+    FaqDetailPage
   ],
   providers: [
     StatusBar,
@@ -52,6 +59,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CustomHttp,
     Device,
     AuthService,
+    FaqService,
     Camera,
     BackgroundGeolocation
   ]
