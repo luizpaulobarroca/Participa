@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { CreatePage } from '../pages/create/create'
 import { ListPage } from '../pages/list/list';
-import {LoginPage} from "../pages/login/login";
+//import {LoginPage} from "../pages/login/login";
 import {Storage} from "@ionic/storage"
 
 @Component({
@@ -14,7 +14,7 @@ import {Storage} from "@ionic/storage"
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = ListPage;
 
   pages: Array<{title: string, component: any}>;
 
