@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
+import {CustomHttp} from "../services/customHttp"
+import { HttpModule } from '@angular/http';
+import {Device} from "@ionic-native/device"
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -25,7 +30,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    FormsModule
+    FormsModule,
+    IonicStorageModule.forRoot(),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,7 +46,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CustomHttp,
+    Device
   ]
 })
 export class AppModule {}

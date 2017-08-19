@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Http, Request, RequestOptionsArgs, Response} from '@angular/http';
+import {Http, Request, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from './auth.service'
 
 @Injectable()
 export class CustomHttp {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   request(req: Request): Observable<Response> {
     let token = localStorage.getItem('authorization');
@@ -15,3 +15,4 @@ export class CustomHttp {
     }
     return this.http.request(req);
   }
+}
