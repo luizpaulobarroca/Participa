@@ -15,6 +15,7 @@ import { ListPage } from '../pages/list/list';
 import { CreatePage } from '../pages/create/create';
 import {SemNotaPage} from "../pages/semNota/semNota";
 import {LoginPage} from "../pages/login/login";
+import { FaqPage } from "../pages/faq/faq";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +27,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     CreatePage,
     SemNotaPage,
-    LoginPage
+    LoginPage,
+    FaqPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     CreatePage,
     SemNotaPage,
-    LoginPage
+    LoginPage,
+    FaqPage
   ],
   providers: [
     StatusBar,

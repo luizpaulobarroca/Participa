@@ -3,27 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Minhas Denúncias</ion-title>
+    <ion-title>Perguntas Frequentes</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div id="lista-vazia" [hidden]="reports.length !== 0">
-    <h1 text-center color="secondary-text-color">
-          Você não possui nenhuma denúncia registrada.
-    </h1>
-    <img id="lista-vazia-image" src="assets/list-background.png">
-    <h4 text-center color="light-text-color"> Se ver alguma irregularidade não deixe de nos avisar!</h4>
-  </div>
 
-  <ion-list>
-    <button ion-item *ngFor="let report of reports">
-      <ion-icon name="md-megaphone" item-left></ion-icon>
-      <h2>{{report.cnpjEmitente}}</h2>
-      <p>{{ report.situacao }}</p>
-      <ion-note item-right>{{ report.dataEmissao | date: 'dd/MM/yyyy'}}</ion-note>
-    </button>
-  </ion-list>
 </ion-content>
 
 <ion-fab right bottom>

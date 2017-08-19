@@ -5,9 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { CreatePage } from '../pages/create/create'
 import { ListPage } from '../pages/list/list';
-import {LoginPage} from "../pages/login/login";
-import {Storage} from "@ionic/storage"
-import {AuthService} from "../services/authService"
+import { FaqPage } from '../pages/faq/faq';
+import { LoginPage } from "../pages/login/login";
+import { Storage } from "@ionic/storage";
+import { AuthService } from "../services/authService"
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +16,7 @@ import {AuthService} from "../services/authService"
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = ListPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -26,7 +27,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Minhas Denúncias', component: ListPage },
-      { title: 'Criar Denúncia', component: CreatePage }
+      { title: 'Criar Denúncia', component: CreatePage },
+      { title: 'Perguntas Frequentes', component: FaqPage}
     ];
 
     this.statusBar.overlaysWebView(true);
