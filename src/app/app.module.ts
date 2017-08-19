@@ -7,7 +7,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CreatePage } from '../pages/create/create';
-import {SemNotaPage} from "../pages/semNota/semNota"
+import {SemNotaPage} from "../pages/semNota/semNota";
+import {LoginPage} from "../pages/login/login";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,7 +19,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     CreatePage,
-    SemNotaPage
+    SemNotaPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     CreatePage,
-    SemNotaPage
+    SemNotaPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
