@@ -9,6 +9,8 @@ import {LoginPage} from "../pages/login/login";
 import { FaqPage } from "../pages/faq/faq";
 import {Storage} from "@ionic/storage"
 import {AuthService} from "../services/authService"
+import {Request, RequestMethod} from "@angular/http";
+import {CustomHttp} from "../services/customHttp";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,12 +19,12 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = ListPage;
-
+  balance: any;
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
               public splashScreen: SplashScreen, private storage: Storage,
-              private authService: AuthService) {
+              private authService: AuthService, private customHttp: CustomHttp) {
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -33,7 +35,6 @@ export class MyApp {
 
     this.statusBar.overlaysWebView(true);
     this.statusBar.backgroundColorByHexString('#5f2f9e');
-    console.log(this.statusBar);
 
     this.storage.get('authorization').then((val) => {
       if(val !== null && val !== undefined) {
@@ -41,9 +42,16 @@ export class MyApp {
         this.authService.saveCPF();
         this.authService.setToken(val);
       }
+      let req = new Request({
+        url: 'http://hackathonapi.sefaz.al.gov.br/sfz-nfcidada-api/api/public/consultarCredito/09326760000168',
+        method: RequestMethod.Get
+      });
+      this.customHttp.request(req).subscribe((response) => {
+        this.balance = JSON.parse(response.text()).valorCredito;
+        console.log('aaaaaaa', this.balance);
+      });
       this.initializeApp();
     });
-
   }
 
   initializeApp() {

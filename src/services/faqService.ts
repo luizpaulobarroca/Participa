@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Http, Request, Response} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import {Storage} from "@ionic/storage"
 
 @Injectable()
@@ -14,7 +13,7 @@ export class FaqService {
     {'question': "Pergunta 6", 'answer': "Resposta 6"}
   ]
   constructor(private http: Http, private storage:Storage) {
-    
+
   }
 
   request(): any {
