@@ -11,6 +11,25 @@
 	width: 100%;
 }
 
+
+#lista-vazia {
+  box-shadow: 0 0 0 0;
+  padding: 5vh 5vh 4vh 4vh;
+}
+
+#lista-vazia-header {
+  margin-top: 10vh;
+}
+
+#lista-vazia-image {
+  max-width: 80%;
+  justify-content: space-around;
+  margin-right: 10vw;
+  margin-left: 10vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
 .bg-image {
 	width: 80%;
 }
