@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Request, RequestMethod} from '@angular/http';
 import { CustomHttp } from "./customHttp"
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private customHttp: CustomHttp) {
+  constructor(private customHttp: CustomHttp, private storage: Storage) {
   }
 
   login(login, id) {
@@ -36,5 +37,9 @@ export class AuthService {
     });
     request.headers.set('Content-Type', 'application/json');
     return this.customHttp.request(request);
+  }
+
+  getCPF() {
+    return this.storage.get('login');
   }
 }

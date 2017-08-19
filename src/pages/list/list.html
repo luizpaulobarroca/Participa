@@ -22,13 +22,15 @@
   </ion-list>
 
   <ion-list>
-    <button ion-item *ngFor="let conduct of historyConducts; index as i" (click)="console.log('b')">
-      <ion-icon name="document" item-left></ion-icon>
-      <h2> Registro {{ i + 1 }}</h2>
-      <p>{{ conduct.date | date: 'dd/MM/yyyy'}}</p>
-      <ion-note item-right>{{ conduct.date | date: 'shortTime'}}</ion-note>
+    <button ion-item *ngFor="let report of reports" (click)="console.log('b')">
+      <ion-icon name="md-megaphone" item-left></ion-icon>
+      <h2>{{report.cnpjEmitente}}</h2>
+      <p>{{ report.situacao }}</p>
+      <ion-note item-right>{{ report.dataEmissao | date: 'dd/MM/yyyy'}}</ion-note>
     </button>
   </ion-list>
+
+  
 
 </ion-content>
 

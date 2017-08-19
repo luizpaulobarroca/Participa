@@ -53,6 +53,6 @@ export class MyApp {
 
   logout() {
     this.storage.remove('authorization');
-    this.nav.setRoot(LoginPage)
+    this.nav.setRoot(ListPage);
   }
 }
