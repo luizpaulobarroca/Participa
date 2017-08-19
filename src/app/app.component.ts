@@ -30,7 +30,8 @@ export class MyApp {
     ];
 
     this.statusBar.overlaysWebView(true);
-    this.statusBar.backgroundColorByHexString('#5F2F9R');
+    this.statusBar.backgroundColorByHexString('#5f2f9e');
+    console.log(this.statusBar);
 
     this.storage.get('authorization').then((val) => {
       if(val !== null && val !== undefined) {

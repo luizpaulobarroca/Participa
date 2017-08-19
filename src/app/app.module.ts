@@ -7,7 +7,8 @@ import {CustomHttp} from "../services/customHttp"
 import { HttpModule } from '@angular/http';
 import {Device} from "@ionic-native/device"
 import {AuthService} from "../services/authService"
-// import { AUTH_PROVIDERS } from 'ng2-bearer';
+import { Camera } from '@ionic-native/camera';
+import {BackgroundGeolocation} from "@ionic-native/background-geolocation"
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -50,7 +51,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CustomHttp,
     Device,
-    AuthService
+    AuthService,
+    Camera,
+    BackgroundGeolocation
   ]
 })
 export class AppModule {}

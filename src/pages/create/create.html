@@ -8,10 +8,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-item (click)="takePhoto()">
+    <ion-icon name="camera" class="camera-size"></ion-icon>
+    Clique para enviar uma foto relacionada a denúncia.
+  </ion-item>
   <form [formGroup]="report" (ngSubmit)="logForm()">
     <ion-list>
       <ion-item>
-        <ion-label floating>Tipo de Denuncia</ion-label>
+        <ion-label floating>Tipo de Denúncia</ion-label>
         <ion-select formControlName="tipoDenuncia">
           <ion-option value="1">Ausência do CPF</ion-option>
           <ion-option value="2">Ausência da Nota</ion-option>

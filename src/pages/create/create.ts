@@ -6,6 +6,11 @@ import {Request, RequestMethod} from "@angular/http";
 import {CustomHttp} from "../../services/customHttp";
 import {AuthService} from "../../services/authService";
 import {ListPage} from "../list/list";
+import {Camera,CameraOptions} from "@ionic-native/camera"
+import {
+  BackgroundGeolocation, BackgroundGeolocationConfig,
+  BackgroundGeolocationResponse
+} from "@ionic-native/background-geolocation"
 
 @Component({
   selector: 'create-page',
@@ -13,14 +18,36 @@ import {ListPage} from "../list/list";
 })
 export class CreatePage {
   private report : FormGroup;
+  private base64Image: string;
+  private location: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private formBuilder: FormBuilder, private customHttp: CustomHttp,
-              private authService: AuthService) {
+              private authService: AuthService, private camera:Camera,
+              private backgroundGeolocation: BackgroundGeolocation) {
     this.report = this.formBuilder.group({
       dataEmissao: ['', Validators.required],
       denuncia: ['', Validators.required],
       tipoDenuncia: ['', Validators.required]
     });
+
+    const config: BackgroundGeolocationConfig = {
+      desiredAccuracy: 10,
+      stationaryRadius: 20,
+      distanceFilter: 30,
+      debug: false, //  enable this hear sounds for background-geolocation life-cycle.
+      stopOnTerminate: true, // enable this to clear background location settings when the app terminates
+    };
+
+    this.backgroundGeolocation.configure(config)
+      .subscribe((location: BackgroundGeolocationResponse) => {
+        this.location = location;
+        console.log(location);
+      });
+
+// start recording location
+    this.backgroundGeolocation.start();
+
+// If you wish to turn OFF background-tracking, call the #stop method.
   }
 
   logForm() {
@@ -28,19 +55,39 @@ export class CreatePage {
       animate: true,
       animation: 'md-trasition',
       direction: 'foward'
-    }
+    };
 
     let values = this.report.value;
     var data = values.dataEmissao.split('-');
     data = data[2] + '/' + data[1] + '/' + data[0];
     values.dataEmissao = data;
+    values.image = this.base64Image;
     values.cpfCnpjDenunciante = this.authService.getCPF();
-    console.log(values.cpfCnpjDenunciante);
+    values.location = {
+      accuracy: this.location.accuracy,
+      latitude: this.location.latitude,
+      longitude: this.location.longitu
+    };
+    this.backgroundGeolocation.stop();
     if(values.tipoDenuncia == '1') {
       this.navCtrl.push(SemNotaPage, values, navOptions);
     } else {
       this.createReport(values)
     }
+  }
+
+  takePhoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   createReport (values) {
