@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Storage } from '@ionic/storage';
 import {Response} from "@angular/http";
@@ -18,11 +18,15 @@ export class LoginPage {
   private report : FormGroup;
   private values = {};
   private login:string;
+  private loading;
   private idAutorizacao:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private formBuilder: FormBuilder, private device: Device, private storage:Storage,
               private alertCtrl: AlertController, private menuController: MenuController,
-              private authService: AuthService) {
+              private authService: AuthService, public loadingCtrl: LoadingController) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
     this.values = this.navParams.data;
     this.menuController.enable(false);
     // console.log(this.menuController);
@@ -56,14 +60,17 @@ export class LoginPage {
   }
 
   logForm() {
+    this.loading.present();
     if (this.login === this.report.value.cpf && this.idAutorizacao) {
       this.authService.login(this.login, this.idAutorizacao).subscribe((response: Response) => {
+        this.loading.dismissAll();
         let res = JSON.parse(response.text());
         this.storage.set('authorization', res.id_token);
-        this.navCtrl.setRoot(ListPage)
+        this.navCtrl.setRoot(ListPage);
       }, (err) => {
         let res = JSON.parse(err.text());
         if(res.codigo === '1') {
+          this.loading.dismissAll();
           this.warningAlert(res.mensagem);
         } else {
           this.requestId();
@@ -76,6 +83,7 @@ export class LoginPage {
 
   requestId () {
     this.authService.request(this.report.value.cpf, this.device.uuid).subscribe((response: Response) => {
+      this.loading.dismissAll();
       let res = JSON.parse(response.text());
       this.storage.set('idAutorizacao', res.idAutorizacao);
       this.storage.set('login', this.report.value.cpf);
@@ -84,6 +92,7 @@ export class LoginPage {
       this.idAutorizacao = res.idAutorizacao;
       this.presentAlert('<a href=' + res.urlAutorizacao + '>Aqui!</a>');
     }, (err) => {
+      this.loading.dismissAll();
       console.log(err)
     });
   }

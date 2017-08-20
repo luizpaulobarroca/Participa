@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SemNotaPage} from "../semNota/semNota"
 import {Request, RequestMethod} from "@angular/http";
 import {CustomHttp} from "../../services/customHttp";
 import {AuthService} from "../../services/authService";
 import {ListPage} from "../list/list";
-import {Camera,CameraOptions} from "@ionic-native/camera"
-import {
-  BackgroundGeolocation, BackgroundGeolocationConfig,
-  BackgroundGeolocationResponse
-} from "@ionic-native/background-geolocation"
+import {Camera,CameraOptions} from "@ionic-native/camera";
+import {Geolocation} from "@ionic-native/geolocation";
+import {DatePicker} from "@ionic-native/date-picker";
+
 
 @Component({
   selector: 'create-page',
@@ -19,35 +18,54 @@ import {
 export class CreatePage {
   private report : FormGroup;
   private base64Image: string;
-  private location: any;
+  private lat:number;
+  private lng:number;
+  private watch:any;
+  private loading:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private formBuilder: FormBuilder, private customHttp: CustomHttp,
               private authService: AuthService, private camera:Camera,
-              private backgroundGeolocation: BackgroundGeolocation) {
+              private datePicker: DatePicker, private geolocation: Geolocation,
+              public loadingCtrl: LoadingController) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
     this.report = this.formBuilder.group({
       dataEmissao: ['', Validators.required],
       denuncia: ['', Validators.required],
       tipoDenuncia: ['', Validators.required]
     });
+    this.watch = this.geolocation.watchPosition();
+    this.watch.subscribe((data) => {
+      this.lat = data.coords.latitude;
+      this.lng = data.coords.longitude;
+    });
 
-    const config: BackgroundGeolocationConfig = {
-      desiredAccuracy: 10,
-      stationaryRadius: 20,
-      distanceFilter: 30,
-      debug: false, //  enable this hear sounds for background-geolocation life-cycle.
-      stopOnTerminate: true, // enable this to clear background location settings when the app terminates
-    };
+  }
 
-    this.backgroundGeolocation.configure(config)
-      .subscribe((location: BackgroundGeolocationResponse) => {
-        this.location = location;
-        console.log(location);
-      });
+  showDatePicker() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {
+        this.report.controls['dataEmissao'].setValue(this.formatDate(date));
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
+  }
 
-// start recording location
-    this.backgroundGeolocation.start();
+  formatDate(date) {
+    var d = date,
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
-// If you wish to turn OFF background-tracking, call the #stop method.
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
   logForm() {
@@ -56,7 +74,12 @@ export class CreatePage {
       animation: 'md-trasition',
       direction: 'foward'
     };
-
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat = resp.coords.latitude;
+      this.lng = resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
     let values = this.report.value;
     var data = values.dataEmissao.split('-');
     data = data[2] + '/' + data[1] + '/' + data[0];
@@ -64,11 +87,9 @@ export class CreatePage {
     values.image = this.base64Image;
     values.cpfCnpjDenunciante = this.authService.getCPF();
     values.location = {
-      accuracy: this.location.accuracy,
-      latitude: this.location.latitude,
-      longitude: this.location.longitu
+      latitude: this.lat,
+      longitude: this.lng
     };
-    this.backgroundGeolocation.stop();
     if(values.tipoDenuncia == '1') {
       this.navCtrl.push(SemNotaPage, values, navOptions);
     } else {
@@ -91,6 +112,7 @@ export class CreatePage {
   }
 
   createReport (values) {
+    this.loading.present();
     let value = values;
     value.cNF = '000';
     let req = new Request({
@@ -101,7 +123,9 @@ export class CreatePage {
     req.headers.set('content-type', 'application/json');
     this.customHttp.request(req).subscribe((response) => {
       this.navCtrl.setRoot(ListPage);
+      this.loading.dismissAll();
     }, (err) => {
+      this.loading.dismissAll();
       console.log(err);
     });
   }

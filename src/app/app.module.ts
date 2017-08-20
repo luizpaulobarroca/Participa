@@ -10,6 +10,8 @@ import { Device } from "@ionic-native/device"
 import { AuthService } from "../services/authService"
 import { Camera } from '@ionic-native/camera';
 import { BackgroundGeolocation } from "@ionic-native/background-geolocation"
+import {DatePicker } from "@ionic-native/date-picker"
+import {Geolocation} from "@ionic-native/geolocation"
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -64,7 +66,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AuthService,
     FaqService,
     Camera,
-    BackgroundGeolocation
+    BackgroundGeolocation,
+    DatePicker,
+    Geolocation
   ]
 })
 export class AppModule {}

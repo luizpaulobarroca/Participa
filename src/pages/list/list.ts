@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
 import { CreatePage } from '../create/create';
 import { MenuController } from 'ionic-angular';
 import { CustomHttp } from '../../services/customHttp';
 import {Request, RequestMethod} from '@angular/http';
 import {AuthService} from "../../services/authService"
 import { ListDetailPage } from "./list-detail/list-detail";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-list',
@@ -19,9 +20,14 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private menuController: MenuController, private customHttp: CustomHttp,
-              private authService: AuthService) {
+              private authService: AuthService, public loadingCtrl: LoadingController) {
     this.menuController.enable(true);
     // If we navigated to this page, we will have an item available as a nav param
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    loading.present();
     this.selectedItem = navParams.get('item');
     let value = {
       cpfCnpjDenunciante: this.authService.getCPF()
@@ -36,6 +42,10 @@ export class ListPage {
     this.customHttp.request(req).subscribe((response) => {
       let res = JSON.parse(response.text());
       this.reports = res;
+      loading.dismissAll();
+    }, () => {
+      loading.dismissAll();
+      this.navCtrl.setRoot(LoginPage);
     });
   }
 

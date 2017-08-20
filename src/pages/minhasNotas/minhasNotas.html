@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar  color="navbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Perguntas Frequentes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-item-group>
+      <ion-item ion-item *ngFor="let question of questions; index as i"  (click)="viewDetail(i)">
+        {{question.question}}
+      </ion-item>
+    </ion-item-group>
+</ion-content>

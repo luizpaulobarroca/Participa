@@ -6,16 +6,32 @@ import { NavParams } from 'ionic-angular';
   templateUrl: 'list-detail.html'
 })
 export class ListDetailPage {
-  question: {
-    question: string,
-    answer: string
+  report: {
+    cnpjDestinatario: string,
+    cnpjEmitente: string,
+    dataEmissao: string,
+    dataDenuncia: string,
+    cpfCnpjDenunciante: string,
+    cpfDestinatario: string,
+    descricaoSituacao: string,
+    situacao: string,
+    tipoDocumento: string,
+    valor: number
   }
 
 
   constructor( private navParams: NavParams ) {
-    this.question = {
-      question: this.navParams.get('question'),
-      answer: this.navParams.get('answer')
+    this.report = {
+      cnpjDestinatario: this.navParams.get('cnpjDestinatario'),
+      cnpjEmitente: this.navParams.get('cnpjEmitente'),
+      dataEmissao: this.navParams.get('dataEmissao'),
+      dataDenuncia: this.navParams.get('dataDenuncia'),
+      cpfCnpjDenunciante: this.navParams.get('cpfCnpjDenunciante'),
+      cpfDestinatario: this.navParams.get('cpfDestinatario'),
+      descricaoSituacao: this.navParams.get('descricaoSituacao'),
+      situacao: this.navParams.get('situacao'),
+      tipoDocumento: this.navParams.get('tipoDocumento'),
+      valor: this.navParams.get('valor')
     }
   }
 }
