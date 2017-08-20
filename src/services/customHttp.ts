@@ -5,7 +5,7 @@ import {Storage} from "@ionic/storage"
 
 @Injectable()
 export class CustomHttp {
-  token: any;
+  public token: any;
   constructor(private http: Http, private storage:Storage) {
     this.storage.get('authorization').then(val => {
       this.token = val;

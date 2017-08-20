@@ -47,6 +47,21 @@ export class SemNotaPage {
     alert.present();
   }
 
+  successAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso',
+      subTitle: 'Denúncia criada com sucesso.',
+      buttons: [{
+        text: 'Ok',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.setRoot(ListPage)
+        }
+      }]
+    });
+    alert.present();
+  }
+
   logForm() {
     this.loading.present();
     var values = this.report.value;
@@ -59,8 +74,8 @@ export class SemNotaPage {
     });
     req.headers.set('content-type', 'application/json');
     this.customHttp.request(req).subscribe((response) => {
-      this.navCtrl.setRoot(ListPage);
       this.loading.dismissAll();
+      this.successAlert();
     }, (err) => {
       this.loading.dismissAll();
       if(err.status === 500) {

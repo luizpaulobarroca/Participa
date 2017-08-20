@@ -38,8 +38,10 @@ export class CreatePage {
     });
     this.watch = this.geolocation.watchPosition();
     this.watch.subscribe((data) => {
-      this.lat = data.coords.latitude;
-      this.lng = data.coords.longitude;
+      if(data.coords) {
+        this.lat = data.coords.latitude;
+        this.lng = data.coords.longitude;
+      }
     });
 
   }
@@ -113,6 +115,21 @@ export class CreatePage {
     alert.present();
   }
 
+  successAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso',
+      subTitle: 'Denúncia criada com sucesso.',
+      buttons: [{
+        text: 'Ok',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.setRoot(ListPage)
+        }
+      }]
+    });
+    alert.present();
+  }
+
   takePhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -138,8 +155,8 @@ export class CreatePage {
     });
     req.headers.set('content-type', 'application/json');
     this.customHttp.request(req).subscribe((response) => {
-      this.navCtrl.setRoot(ListPage);
       this.loading.dismissAll();
+      this.successAlert();
     }, (err) => {
       this.loading.dismissAll();
       if(err.status === 500) {

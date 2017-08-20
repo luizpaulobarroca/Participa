@@ -5,12 +5,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="report.cnpjEmitente">
     <ion-card-header>
-      {{report.cnpjDestinatario}}
+      CNPJ Emitente
     </ion-card-header>
     <ion-card-content>
       {{report.cnpjEmitente}}
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="report.dataEmissao">
+    <ion-card-header>
+      Data Emissão
+    </ion-card-header>
+    <ion-card-content>
+      {{ report.dataEmissao | date: 'dd/MM/yyyy'}}
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="report.situacao">
+    <ion-card-header>
+      Situação
+    </ion-card-header>
+    <ion-card-content>
+      {{ report.situacao }}
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="report.denuncia">
+    <ion-card-header>
+      Denúncia
+    </ion-card-header>
+    <ion-card-content>
+      {{ report.denuncia }}
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -16,8 +16,9 @@ export class ListDetailPage {
     descricaoSituacao: string,
     situacao: string,
     tipoDocumento: string,
-    valor: number
-  }
+    valor: number,
+    denuncia: string
+  };
 
 
   constructor( private navParams: NavParams ) {
@@ -30,6 +31,7 @@ export class ListDetailPage {
       cpfDestinatario: this.navParams.get('cpfDestinatario'),
       descricaoSituacao: this.navParams.get('descricaoSituacao'),
       situacao: this.navParams.get('situacao'),
+      denuncia: this.navParams.get('denuncia'),
       tipoDocumento: this.navParams.get('tipoDocumento'),
       valor: this.navParams.get('valor')
     }

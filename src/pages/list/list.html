@@ -18,7 +18,7 @@
 
   <ion-list>
     <button ion-item *ngFor="let report of reports; index as i" (click)="viewDetail(i)">
-      <ion-icon name="md-megaphone" item-left></ion-icon>
+      <ion-icon name="md-megaphone" color="fabButton" item-left></ion-icon>
       <h2>{{report.cnpjEmitente}}</h2>
       <p>{{ report.situacao }}</p>
       <ion-note item-right>{{ report.dataEmissao | date: 'dd/MM/yyyy'}}</ion-note>

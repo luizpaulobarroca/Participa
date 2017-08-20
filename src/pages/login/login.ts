@@ -6,9 +6,10 @@ import {Response} from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Device } from "@ionic-native/device";
 import { AlertController } from 'ionic-angular';
-import {ListPage} from "../list/list";
 import { MenuController } from 'ionic-angular';
 import {AuthService} from "../../services/authService"
+import {CustomHttp} from "../../services/customHttp"
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'login-page',
@@ -24,7 +25,7 @@ export class LoginPage {
               private formBuilder: FormBuilder, private device: Device,
               private storage:Storage, private alertCtrl: AlertController,
               private menuController: MenuController, private authService: AuthService,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, public customHttp: CustomHttp) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -68,7 +69,9 @@ export class LoginPage {
         let res = JSON.parse(response.text());
         this.storage.set('authorization', res.id_token);
         this.authService.setToken(res.id_token);
-        this.navCtrl.setRoot(ListPage);
+        this.customHttp.token = res.id_token;
+        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(HomePage);
       }, (err) => {
         let res = JSON.parse(err.text());
         if(res.codigo === '1') {
