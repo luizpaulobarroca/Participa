@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SemNotaPage} from "../semNota/semNota"
 import {Request, RequestMethod} from "@angular/http";
@@ -9,6 +9,7 @@ import {ListPage} from "../list/list";
 import {Camera,CameraOptions} from "@ionic-native/camera";
 import {Geolocation} from "@ionic-native/geolocation";
 import {DatePicker} from "@ionic-native/date-picker";
+import {LoginPage} from "../login/login";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CreatePage {
               private formBuilder: FormBuilder, private customHttp: CustomHttp,
               private authService: AuthService, private camera:Camera,
               private datePicker: DatePicker, private geolocation: Geolocation,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -97,6 +98,21 @@ export class CreatePage {
     }
   }
 
+  errorAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Erro no servidor;',
+      // subTitle: text,
+      buttons: [{
+        text: 'Ok',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.setRoot(ListPage)
+        }
+      }]
+    });
+    alert.present();
+  }
+
   takePhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -126,6 +142,11 @@ export class CreatePage {
       this.loading.dismissAll();
     }, (err) => {
       this.loading.dismissAll();
+      if(err.status === 500) {
+        this.errorAlert();
+      } else if(err.status === 403) {
+        this.navCtrl.setRoot(LoginPage);
+      }
       console.log(err);
     });
   }

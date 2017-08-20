@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import { CreatePage } from '../create/create';
 import { MenuController } from 'ionic-angular';
 import { CustomHttp } from '../../services/customHttp';
@@ -20,7 +20,8 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private menuController: MenuController, private customHttp: CustomHttp,
-              private authService: AuthService, public loadingCtrl: LoadingController) {
+              private authService: AuthService, public loadingCtrl: LoadingController,
+              private alertCtrl: AlertController) {
     this.menuController.enable(true);
     // If we navigated to this page, we will have an item available as a nav param
     let loading = this.loadingCtrl.create({
@@ -43,10 +44,29 @@ export class ListPage {
       let res = JSON.parse(response.text());
       this.reports = res;
       loading.dismissAll();
-    }, () => {
+    }, (err) => {
       loading.dismissAll();
-      this.navCtrl.setRoot(LoginPage);
+      if(err.status === 500) {
+        this.errorAlert();
+      } else if(err.status === 403) {
+        this.navCtrl.setRoot(LoginPage);
+      }
     });
+  }
+
+  errorAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Erro no servidor;',
+      // subTitle: text,
+      buttons: [{
+        text: 'Ok',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.setRoot(ListPage)
+        }
+      }]
+    });
+    alert.present();
   }
 
   viewDetail(index){

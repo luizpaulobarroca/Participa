@@ -21,9 +21,10 @@ export class LoginPage {
   private loading;
   private idAutorizacao:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private formBuilder: FormBuilder, private device: Device, private storage:Storage,
-              private alertCtrl: AlertController, private menuController: MenuController,
-              private authService: AuthService, public loadingCtrl: LoadingController) {
+              private formBuilder: FormBuilder, private device: Device,
+              private storage:Storage, private alertCtrl: AlertController,
+              private menuController: MenuController, private authService: AuthService,
+              public loadingCtrl: LoadingController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });

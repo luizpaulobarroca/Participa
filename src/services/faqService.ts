@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Http, Request, Response} from '@angular/http';
-import {Storage} from "@ionic/storage"
 
 @Injectable()
 export class FaqService {
@@ -12,7 +10,7 @@ export class FaqService {
     {'question': "Pergunta 5", 'answer': "Resposta 5"},
     {'question': "Pergunta 6", 'answer': "Resposta 6"}
   ]
-  constructor(private http: Http, private storage:Storage) {
+  constructor() {
 
   }
 

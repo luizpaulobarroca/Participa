@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Request, RequestMethod} from "@angular/http";
 import {ListPage} from "../list/list";
 import {CustomHttp} from "../../services/customHttp";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'sem-nota-page',
@@ -15,7 +16,7 @@ export class SemNotaPage {
   private loading:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private formBuilder: FormBuilder, private customHttp:CustomHttp,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -29,6 +30,21 @@ export class SemNotaPage {
       cnpjEmitente: ['', Validators.required],
       numeroECF: ['', Validators.required],
     });
+  }
+
+  errorAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Erro no servidor;',
+      // subTitle: text,
+      buttons: [{
+        text: 'Ok',
+        role: 'ok',
+        handler: () => {
+          this.navCtrl.setRoot(ListPage)
+        }
+      }]
+    });
+    alert.present();
   }
 
   logForm() {
@@ -47,6 +63,11 @@ export class SemNotaPage {
       this.loading.dismissAll();
     }, (err) => {
       this.loading.dismissAll();
+      if(err.status === 500) {
+        this.errorAlert();
+      } else if(err.status === 403) {
+        this.navCtrl.setRoot(LoginPage);
+      }
       console.log(err);
     });
   }
