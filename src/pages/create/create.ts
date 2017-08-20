@@ -117,7 +117,7 @@ export class CreatePage {
 
   successAlert() {
     let alert = this.alertCtrl.create({
-      subTitle: 'Denúncia efetuad.',
+      subTitle: 'Denúncia efetuada.',
       buttons: [{
         text: 'Ok',
         role: 'ok',
