@@ -19,7 +19,7 @@ import {CustomHttp} from "../services/customHttp";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = FaqPage;
   balance: any;
   pages: Array<{title: string, component: any}>;
 
