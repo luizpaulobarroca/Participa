@@ -33,6 +33,7 @@ export class MyApp {
       { title: 'Minhas Denúncias', component: ListPage },
       { title: 'Criar Denúncia', component: CreatePage },
       { title: 'Perguntas Frequentes', component: FaqPage },
+      { title: 'Home', component: HomePage }
     ];
 
     this.statusBar.overlaysWebView(true);
@@ -46,6 +47,14 @@ export class MyApp {
           this.authService.setToken(val);
         })
       }
+      let req = new Request({
+        url: 'http://hackathonapi.sefaz.al.gov.br/sfz-nfcidada-api/api/public/consultarCredito/09326760000168',
+        method: RequestMethod.Get
+      });
+      this.customHttp.request(req).subscribe((response) => {
+        this.balance = JSON.parse(response.text()).valorCredito;
+        console.log('aaaaaaa', this.balance);
+      });
       this.initializeApp();
     });
   }
