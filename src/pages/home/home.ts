@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MenuController, NavController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController} from 'ionic-angular';
 import {CustomHttp} from "../../services/customHttp";
 import {Request, RequestMethod} from "@angular/http";
 
@@ -10,8 +10,13 @@ import {Request, RequestMethod} from "@angular/http";
 export class HomePage {
   private balance: number;
   private notas: any;
+  private loading: any;
   constructor(public navCtrl: NavController, private customHttp: CustomHttp,
-              private menuController: MenuController) {
+              private menuController: MenuController, public loadingCtrl: LoadingController) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Por favor aguarde...'
+    });
+    this.loading.present();
     this.menuController.enable(true);
     let req = new Request({
       url: 'http://hackathonapi.sefaz.al.gov.br/sfz-nfcidada-api/api/public/consultarCredito/09326760000168',
@@ -32,6 +37,7 @@ export class HomePage {
     req2.headers.set('content-type', 'application/json');
     this.customHttp.request(req2).subscribe((response) => {
       this.notas = JSON.parse(response.text());
+      this.loading.dismissAll();
     });
   }
 

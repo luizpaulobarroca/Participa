@@ -24,7 +24,7 @@ export class ListPage {
               private alertCtrl: AlertController) {
     // If we navigated to this page, we will have an item available as a nav param
     let loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Por favor aguarde...'
     });
 
     loading.present();

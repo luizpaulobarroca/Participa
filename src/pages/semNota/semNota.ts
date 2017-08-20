@@ -18,7 +18,7 @@ export class SemNotaPage {
               private formBuilder: FormBuilder, private customHttp:CustomHttp,
               public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Por favor aguarde...'
     });
     this.values = this.navParams.data;
     this.report = this.formBuilder.group({
@@ -49,8 +49,7 @@ export class SemNotaPage {
 
   successAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Sucesso',
-      subTitle: 'Denúncia criada com sucesso.',
+      subTitle: 'Denúncia efetuada.',
       buttons: [{
         text: 'Ok',
         role: 'ok',

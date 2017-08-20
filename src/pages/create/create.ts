@@ -29,7 +29,7 @@ export class CreatePage {
               private datePicker: DatePicker, private geolocation: Geolocation,
               public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Por favor aguarde...'
     });
     this.report = this.formBuilder.group({
       dataEmissao: ['', Validators.required],
@@ -117,8 +117,7 @@ export class CreatePage {
 
   successAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Sucesso',
-      subTitle: 'Denúncia criada com sucesso.',
+      subTitle: 'Denúncia efetuad.',
       buttons: [{
         text: 'Ok',
         role: 'ok',

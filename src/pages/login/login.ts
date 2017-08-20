@@ -27,7 +27,7 @@ export class LoginPage {
               private menuController: MenuController, private authService: AuthService,
               public loadingCtrl: LoadingController, public customHttp: CustomHttp) {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Por favor aguarde...'
     });
     this.values = this.navParams.data;
     this.menuController.enable(false);
