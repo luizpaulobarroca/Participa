@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { HomePage } from '../pages/home/home';
 import { CreatePage } from '../pages/create/create'
 import { ListPage } from '../pages/list/list';
 import {LoginPage} from "../pages/login/login";
@@ -18,7 +19,7 @@ import {CustomHttp} from "../services/customHttp";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ListPage;
+  rootPage: any = HomePage;
   balance: any;
   pages: Array<{title: string, component: any}>;
 
@@ -30,7 +31,8 @@ export class MyApp {
     this.pages = [
       { title: 'Minhas Denúncias', component: ListPage },
       { title: 'Criar Denúncia', component: CreatePage },
-      { title: 'Perguntas Frequentes', component: FaqPage }
+      { title: 'Perguntas Frequentes', component: FaqPage },
+      { title: 'Home', component: HomePage }
     ];
 
     this.statusBar.overlaysWebView(true);
