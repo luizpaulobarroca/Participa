@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar  color="navbar">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sorteios</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let sorteio of sorteios">
+      <!--<ion-icon name="md-megaphone" item-left></ion-icon>-->
+      <h2>{{ sorteio.descricao}}</h2>
+      <p>Data do sorteio {{ sorteio.dataRealizacao | date: 'dd/MM/yyyy'}}</p>
+    </button>
+  </ion-list>
+</ion-content>

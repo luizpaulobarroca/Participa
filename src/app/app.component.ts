@@ -10,8 +10,7 @@ import {LoginPage} from "../pages/login/login";
 import { FaqPage } from "../pages/faq/faq";
 import {Storage} from "@ionic/storage"
 import {AuthService} from "../services/authService"
-import {Request, RequestMethod} from "@angular/http";
-import {CustomHttp} from "../services/customHttp";
+import {SorteiosPage} from "../pages/sorteios/sorteios";
 
 @Component({
   templateUrl: 'app.html'
@@ -19,20 +18,21 @@ import {CustomHttp} from "../services/customHttp";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
   balance: any;
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
               public splashScreen: SplashScreen, private storage: Storage,
-              private authService: AuthService, private customHttp: CustomHttp) {
+              private authService: AuthService) {
 
     // used for an example of ngFor and navigation
     this.pages = [
+      { title: 'Home', component: HomePage },
+      { title: 'Sorteios', component: SorteiosPage },
       { title: 'Minhas Denúncias', component: ListPage },
       { title: 'Criar Denúncia', component: CreatePage },
       { title: 'Perguntas Frequentes', component: FaqPage },
-      { title: 'Home', component: HomePage }
     ];
 
     this.statusBar.overlaysWebView(true);
@@ -40,18 +40,12 @@ export class MyApp {
 
     this.storage.get('authorization').then((val) => {
       if(val !== null && val !== undefined) {
-        this.nav.setRoot(ListPage);
-        this.authService.saveCPF();
-        this.authService.setToken(val);
+        this.nav.setRoot(HomePage);
+        this.storage.get('login').then(value => {
+          this.authService.setCPF(value);
+          this.authService.setToken(val);
+        })
       }
-      let req = new Request({
-        url: 'http://hackathonapi.sefaz.al.gov.br/sfz-nfcidada-api/api/public/consultarCredito/09326760000168',
-        method: RequestMethod.Get
-      });
-      this.customHttp.request(req).subscribe((response) => {
-        this.balance = JSON.parse(response.text()).valorCredito;
-        console.log('aaaaaaa', this.balance);
-      });
       this.initializeApp();
     });
   }

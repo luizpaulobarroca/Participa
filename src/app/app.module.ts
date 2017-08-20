@@ -22,6 +22,7 @@ import {SemNotaPage} from "../pages/semNota/semNota";
 import {LoginPage} from "../pages/login/login";
 import { FaqPage } from "../pages/faq/faq";
 import { FaqDetailPage } from  "../pages/faq/faq-detail/faq-detail";
+import { SorteiosPage } from "../pages/sorteios/sorteios"
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,7 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SemNotaPage,
     LoginPage,
     FaqPage,
-    FaqDetailPage
+    FaqDetailPage,
+    SorteiosPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SemNotaPage,
     LoginPage,
     FaqPage,
-    FaqDetailPage
+    FaqDetailPage,
+    SorteiosPage
   ],
   providers: [
     StatusBar,

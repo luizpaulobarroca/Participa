@@ -7,9 +7,6 @@
 
   <ion-content>
     <ion-list>
-      <ion-item>
-        <h2>Seu saldo: R${{balance}}</h2>
-      </ion-item>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

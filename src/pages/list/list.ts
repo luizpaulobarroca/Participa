@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import { CreatePage } from '../create/create';
-import { MenuController } from 'ionic-angular';
 import { CustomHttp } from '../../services/customHttp';
 import {Request, RequestMethod} from '@angular/http';
 import {AuthService} from "../../services/authService"
 import { ListDetailPage } from "./list-detail/list-detail";
 import {LoginPage} from "../login/login";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-list',
@@ -19,10 +19,9 @@ export class ListPage {
   reports = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private menuController: MenuController, private customHttp: CustomHttp,
+              private customHttp: CustomHttp,
               private authService: AuthService, public loadingCtrl: LoadingController,
               private alertCtrl: AlertController) {
-    this.menuController.enable(true);
     // If we navigated to this page, we will have an item available as a nav param
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -62,7 +61,7 @@ export class ListPage {
         text: 'Ok',
         role: 'ok',
         handler: () => {
-          this.navCtrl.setRoot(ListPage)
+          this.navCtrl.setRoot(HomePage)
         }
       }]
     });

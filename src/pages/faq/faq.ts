@@ -17,7 +17,6 @@ export class FaqPage {
   }
 
   viewDetail(index){
-    console.log(index);
     var navOptions = {
       animate: true,
       animation: 'md-trasition',

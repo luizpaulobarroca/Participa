@@ -12,7 +12,7 @@
   <ion-card>
     <img clas="back" src="assets/maceio.png"/>
     <div class="card-title">
-      R$ 1231,00
+      R$ {{balance}}
     </div>
     <div class="card-subtitle">
       Saldo Nota Fiscal Cidadã
@@ -23,16 +23,18 @@
   <ion-list no-lines>
     <ion-list-header>
       Ultimas notas fiscais
+      <ion-note item-right>Total de bilhetes: 100</ion-note>
     </ion-list-header>
-    <button ion-item >
-      Item 1
-    </button>
-    <button ion-item >
-      Item 1
-    </button>
-    <button ion-item >
-      Item 1
-    </button>
+    <ion-item *ngFor="let nota of  notas">
+      {{nota.descricaoContribuinte}}
+      <ion-note item-right>{{ nota.dataEmissao | date: 'dd/MM/yyyy'}}</ion-note>
+    </ion-item>
+    <!--<button ion-item >-->
+      <!--Item 1-->
+    <!--</button>-->
+    <!--<button ion-item >-->
+      <!--Item 1-->
+    <!--</button>-->
   </ion-list>
 
 

@@ -67,6 +67,7 @@ export class LoginPage {
         this.loading.dismissAll();
         let res = JSON.parse(response.text());
         this.storage.set('authorization', res.id_token);
+        this.authService.setToken(res.id_token);
         this.navCtrl.setRoot(ListPage);
       }, (err) => {
         let res = JSON.parse(err.text());
